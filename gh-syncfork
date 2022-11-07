@@ -3,8 +3,6 @@ set -e
 
 isFork=$(gh repo view --json isFork -q ".isFork")
 
-echo $isFork
-
 if $isFork; then
         owner=$(gh repo view --json owner -q ".owner.login")
         name=$(gh repo view --json name -q ".name")
