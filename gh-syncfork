@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+isFork=$(gh repo view --json isFork -q ".isFork")
+
+echo $isFork
+
+if $isFork; then
+        owner=$(gh repo view --json owner -q ".owner.login")
+        name=$(gh repo view --json name -q ".name")
+        branch=$(gh repo view --json defaultBranchRef -q ".defaultBranchRef.name")
+        gh repo sync ${owner}/${name} -b ${branch}
+else
+        echo "Is not a fork"
+fi
